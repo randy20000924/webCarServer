@@ -22,17 +22,18 @@ function dataCut( data, page_id, step, length){
 }
 
 app.get('/car/:page_id', cors(corsOptions), function(req, res) {
-  var page_id = req.params.page_id;
+  var page_id = req.params.page_id
+  var rout = req.params.page_id.split('_')[0];
   var step = parseInt(req.query.step);
   var length = parseInt(req.query.length);
   const fs = require("fs");
-  const content = fs.readFileSync(`./public/${page_id}.json`);
+  const content = fs.readFileSync(`./public/carData/${rout}/${page_id}.json`);
   if (step==length){
-
-    totalLength = JSON.parse(content.toString())[page_id].length
+    console.log(JSON.parse(content.toString()))
+    totalLength = JSON.parse(content.toString())[rout].length
     res.json({"length": totalLength})
   }else{
-    var dataFrag = dataCut(content.toString(), page_id, step, length)
+    var dataFrag = dataCut(content.toString(), rout, step, length)
     res.json(dataFrag)
   }
 })
