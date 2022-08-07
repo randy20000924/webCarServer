@@ -27,7 +27,7 @@ app.get('/car/:page_id', cors(corsOptions), function(req, res) {
   var step = parseInt(req.query.step);
   var length = parseInt(req.query.length);
   const fs = require("fs");
-  const content = fs.readFileSync(`./public/carData/${rout}/${page_id}.json`);
+  const content = fs.readFileSync(`./public/carDatas/${rout}/${page_id}.json`);
   if (step==length){
     console.log(JSON.parse(content.toString()))
     totalLength = JSON.parse(content.toString())[rout].length
@@ -42,7 +42,7 @@ app.get('/carid/', cors(corsOptions), function(req, res) {
   var data
   var result = {}
   const fs = require('fs')
-  const dir = './public/carData'
+  const dir = './public/carDatas'
   const files = fs.readdirSync(dir)
   for (const file of files) {
     var datas = fs.readdirSync(dir+'/'+file)
@@ -55,4 +55,4 @@ app.get('/carid/', cors(corsOptions), function(req, res) {
   res.send(result)
 }) 
 
-app.listen(5000);
+app.listen(3001);
